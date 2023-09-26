@@ -56,6 +56,7 @@ Get-AppxPackage "Microsoft.BingNews" | Remove-AppxPackage
 Get-AppxPackage "Microsoft.MicrosoftOfficeHub" | Remove-AppxPackage
 Get-AppxPackage "Microsoft.ZuneMusic" | Remove-AppxPackage
 Get-AppxPackage "MicrosoftTeams" | Remove-AppxPackage
+Get-AppxPackage "Microsoft.MicrosoftSolitaireCollection" | Remove-AppxPackage
 
 Move-Item -Path "data\desktop\*" -Destination "$env:USERPROFILE\Desktop"
 Stop-Process -Name explorer -Force
