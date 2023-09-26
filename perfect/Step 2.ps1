@@ -1,13 +1,9 @@
-Invoke-WebRequest -Uri "https://aka.ms/vs/17/release/vc_redist.x64.exe" -OutFile "data\vc.exe"
-$oneDriveUninstall = (Get-ItemProperty -Path HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\OneDriveSetup.exe).UninstallString
-Start-Process -FilePath "powershell.exe" -ArgumentList {
-    reg import "$env:USERPROFILE\Desktop\perfect\data\bing.reg"
-    & "$env:USERPROFILE\Desktop\perfect\data\vc.exe"
-    & "$oneDriveUninstall" /uninstall
-    Disable-WindowsOptionalFeature -Online -FeatureName 'WindowsMediaPlayer' -NoRestart
-} -Verb RunAs
-
-irm get.scoop.sh | iex
+$ErrorActionPreference = [System.Management.Automation.ActionPreference]::Continue
+$scoopExists = Get-Command scoop
+if(!$scoopExists) 
+{
+    irm get.scoop.sh | iex
+}
 scoop install 7zip git
 scoop bucket add extras
 scoop bucket add java
@@ -61,6 +57,3 @@ Get-AppxPackage "Microsoft.WindowsMaps" | Remove-AppxPackage
 Get-AppxPackage "Microsoft.Todos" | Remove-AppxPackage
 Get-AppxPackage "Microsoft.WindowsFeedbackHub" | Remove-AppxPackage
 Get-AppxPackage "Microsoft.Getstarted" | Remove-AppxPackage
-
-Move-Item -Path "data\desktop\*" -Destination "$env:USERPROFILE\Desktop"
-Stop-Process -Name explorer -Force
