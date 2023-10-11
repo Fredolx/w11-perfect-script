@@ -26,7 +26,16 @@ function Install-Registry-Edits {
     Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name Hidden -Value 1
     reg import "data\rightclick.reg"
     reg import "$env:USERPROFILE\scoop\apps\7zip\current\install-context.reg"
-    Stop-Process -Name explorer -Force
+    RemoveEdgeStartup
+    Stop-Process -Name explorer -Force    
+}
+
+function RemoveEdgeStartup {
+    $registryPath = "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\StartupApproved\Run"
+    $values = Get-ItemProperty -Path $registryPath | Get-ItemProperty | ForEach-Object { $_.PSObject.Properties }
+    $valueName = $($values | Where-Object { $_.Name -like 'MicrosoftEdgeAutoLaunch*' } | Select-Object -First 1).Name
+    $binaryData = 3, 0, 0, 0, 21, 117, 166, 208, 33, 252, 217, 1
+    Set-ItemProperty -Path $registryPath -Name $valueName -Value $binaryData -Type Binary
 }
 
 function Set-FTAs {
