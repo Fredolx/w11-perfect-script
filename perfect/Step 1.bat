@@ -1,1 +1,1 @@
-powershell.exe -Command "Set-ExecutionPolicy RemoteSigned -Scope CurrentUser"
+powershell.exe -Command "Set-ExecutionPolicy Bypass -Scope CurrentUser"
