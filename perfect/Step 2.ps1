@@ -93,7 +93,10 @@ function Show-Menu() {
 }
 
 $ErrorActionPreference = [System.Management.Automation.ActionPreference]::Continue
-$logFilePath = "$(Get-Date -Format "yyyy_MM_dd_HH_mm_ss").log"
+if(!(Test-Path -Path "logs")) {
+        New-Item "logs" -Type Directory
+}
+$logFilePath = "logs/$(Get-Date -Format "yyyy_MM_dd_HH_mm_ss").log"
 Start-Transcript -Path $logFilePath -Append
 
 do {
