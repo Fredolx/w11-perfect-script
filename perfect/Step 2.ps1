@@ -76,7 +76,7 @@ function Move-Extras {
 }
 
 function Admin {
-    Start-Process -FilePath "powershell.exe" -ArgumentList "-NoProfile -ExecutionPolicy Bypass -NoExit -File $PSScriptRoot\data\7.ps1" -Verb RunAs
+    Start-Process -FilePath "powershell.exe" -ArgumentList "-NoProfile -ExecutionPolicy Bypass -File $PSScriptRoot\data\7.ps1" -Verb RunAs
 } 
 
 function Show-Menu() {
