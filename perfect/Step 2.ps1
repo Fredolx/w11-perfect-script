@@ -76,31 +76,7 @@ function Move-Extras {
 }
 
 function Admin {
-    $fileName = [System.IO.Path]::Combine([System.IO.Path]::GetTempPath(), "perfect.txt")
-    $textContent = $PSScriptRoot
-    $textContent | Set-Content -Path $fileName
-
-    $fileName = [System.IO.Path]::Combine([System.IO.Path]::GetTempPath(), "perfect-log.txt")
-    $textContent = $logFilePath
-    $textContent | Set-Content -Path $fileName
-
-    Start-Process -FilePath "powershell.exe" -ArgumentList {
-        $tempLogPath = [System.IO.Path]::Combine([System.IO.Path]::GetTempPath(), "perfect-log.txt")
-        $logPath = Get-Content -Path $tempLogPath
-        Start-Transcript -Path $logFilePath -Append
-
-        $tempPath = [System.IO.Path]::Combine([System.IO.Path]::GetTempPath(), "perfect.txt")
-        $path = Get-Content -Path $tempPath
-        
-        Invoke-WebRequest -Uri "https://aka.ms/vs/17/release/vc_redist.x64.exe" -OutFile "$path\data\vc.exe"
-        $oneDriveUninstall = (Get-ItemProperty -Path HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\OneDriveSetup.exe).UninstallString
-        reg import "$path\data\bing.reg"
-        & "$path\data\vc.exe"
-        & "$oneDriveUninstall"
-        Disable-WindowsOptionalFeature -Online -FeatureName 'WindowsMediaPlayer' -NoRestart
-
-        Stop-Process -Name explorer -Force
-    } -Verb RunAs
+    Start-Process -FilePath "powershell.exe" -ArgumentList "-NoProfile -ExecutionPolicy Bypass -NoExit -File $PSScriptRoot\data\7.ps1" -Verb RunAs
 } 
 
 function Show-Menu() {
