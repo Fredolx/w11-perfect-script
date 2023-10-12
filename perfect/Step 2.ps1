@@ -21,19 +21,38 @@ function Install-UpdateScoop-Task {
 }
 
 function Install-Registry-Edits {
+    Remove-Edge-Startup
     Set-ItemProperty -Path "HKCU:\Control Panel\Mouse" -Name MouseSpeed -Value 0
     Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name HideFileExt -Value 0
     Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name Hidden -Value 1
     Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name TaskbarDa -Value 0
     Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name ShowTaskViewButton -Value 0
     Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name TaskbarMn -Value 0
-    reg import "data\rightclick.reg"
+    Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" -Name RotatingLockScreenEnabled -Value 0
+    Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" -Name SubscribedContent-338387Enabled -Value 0
+    reg import "$PSScriptRoot\data\rightclick.reg"
     reg import "$env:USERPROFILE\scoop\apps\7zip\current\install-context.reg"
-    RemoveEdgeStartup
+    Set-PowerPlan
     Stop-Process -Name explorer -Force    
 }
 
-function RemoveEdgeStartup {
+function Set-PowerPlan {
+    $powerplans = powercfg list
+    $pattern = "Power Scheme GUID: ([a-f0-9-]+)\s+\(High performance\)"
+    $match = $powerplans | Select-String -Pattern $pattern
+    $guid = $match.Matches.Groups[1].Value
+    powercfg /setactive $guid
+    powercfg /change monitor-timeout-ac 0
+    powercfg /change monitor-timeout-dc 0
+    powercfg /change standby-timeout-ac 0
+    powercfg /change standby-timeout-dc 0
+}
+
+function Remove-Edge-Startup {
+    Write-Host "Go to the startup tab in the task manager window that will appear and then close it"
+    Write-Host "Sleeping 5 seconds..."
+    sleep 5
+    $proc = Start-Process taskmgr.exe -Wait
     $registryPath = "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\StartupApproved\Run"
     $values = Get-ItemProperty -Path $registryPath | Get-ItemProperty | ForEach-Object { $_.PSObject.Properties }
     $valueName = $($values | Where-Object { $_.Name -like 'MicrosoftEdgeAutoLaunch*' } | Select-Object -First 1).Name
