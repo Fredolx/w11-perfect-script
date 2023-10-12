@@ -114,13 +114,13 @@ function Show-Menu() {
     Clear-Host
     Write-Host '1. Install scoop apps'
     Write-Host '2. Install task scheduler task for scoop updates'
-    Write-Host '3. Install registry edits'
-    Write-Host '4. Set file type assocations'
-    Write-Host '5. Delete MS-Apps'
-    Write-Host '6. Move extras to desktop'
+    Write-Host '3. Set file type assocations'
+    Write-Host '4. Delete MS-Apps'
+    Write-Host '5. Move extras to desktop'
+    Write-Host '6. Install registry edits'
     Write-Host '7. Remove Ads, OneDrive, LegacyMediaPlayer (ADMIN)'
-    Write-Host 'To do all steps, type all numbers (123456), recommended to do 7 after'
-    Write-Host 'Enter q to quit'
+    Write-Host 'Q to quit'
+    Write-Host 'To do all steps, type all numbers (12345), it''s strongly recommended to do 12345 then 67 seperately'
 }
 
 $ErrorActionPreference = [System.Management.Automation.ActionPreference]::Continue
@@ -133,7 +133,7 @@ Start-Transcript -Path $logFilePath -Append
 do {
     Show-Menu
     $choice = Read-Host "Enter your choice"
-
+    Clear-Host
     if($choice.Contains('1')) {
         Install-Scoop
     }
@@ -141,16 +141,16 @@ do {
         Install-UpdateScoop-Task
     }
     if($choice.Contains('3')) {
-        Install-Registry-Edits
-    }
-    if($choice.Contains('4')) {
         Set-FTAs
     }
-    if($choice.Contains('5')) {
+    if($choice.Contains('4')) {
         Delete-MS-Apps
     }
-    if($choice.Contains('6')) {
+    if($choice.Contains('5')) {
         Move-Extras
+    }
+    if($choice.Contains('6')) {
+        Install-Registry-Edits
     }
     if($choice.Contains('7')) {
         Admin
