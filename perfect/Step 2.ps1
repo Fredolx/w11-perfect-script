@@ -32,7 +32,6 @@ function Install-Registry-Edits {
     Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" -Name SubscribedContent-338387Enabled -Value 0
     reg import "$PSScriptRoot\data\rightclick.reg"
     reg import "$env:USERPROFILE\scoop\apps\7zip\current\install-context.reg"
-    Set-PowerPlan
     Stop-Process -Name explorer -Force    
 }
 
@@ -114,15 +113,16 @@ function Admin {
 
 function Show-Menu() {
     Clear-Host
-    Write-Host '1. Install scoop apps'
-    Write-Host '2. Install task scheduler task for scoop updates'
-    Write-Host '3. Set file type assocations'
-    Write-Host '4. Delete MS-Apps'
-    Write-Host '5. Move extras to desktop'
-    Write-Host '6. Install registry edits'
-    Write-Host '7. Remove Ads, OneDrive, LegacyMediaPlayer (ADMIN)'
+    Write-Host '1. Set Power Plan to High Performance'
+    Write-Host '2. Install scoop apps'
+    Write-Host '3. Install task scheduler task for scoop updates'
+    Write-Host '4. Set file type assocations'
+    Write-Host '5. Delete MS-Apps'
+    Write-Host '6. Move extras to desktop'
+    Write-Host '7. Install registry edits'
+    Write-Host '8. Remove Ads, OneDrive, LegacyMediaPlayer (ADMIN)'
     Write-Host 'Q to quit'
-    Write-Host 'To do all steps, type all numbers (12345), it''s strongly recommended to do 12345 then 67 seperately'
+    Write-Host 'To do all steps, type all numbers (12345), it''s strongly recommended to do 123456 then 78 seperately'
 }
 
 $ErrorActionPreference = [System.Management.Automation.ActionPreference]::Continue
@@ -137,24 +137,27 @@ do {
     $choice = Read-Host "Enter your choice"
     Clear-Host
     if($choice.Contains('1')) {
-        Install-Scoop
+        Set-PowerPlan
     }
     if($choice.Contains('2')) {
-        Install-UpdateScoop-Task
+        Install-Scoop
     }
     if($choice.Contains('3')) {
-        Set-FTAs
+        Install-UpdateScoop-Task
     }
     if($choice.Contains('4')) {
-        Delete-MS-Apps
+        Set-FTAs
     }
     if($choice.Contains('5')) {
-        Move-Extras
+        Delete-MS-Apps
     }
     if($choice.Contains('6')) {
-        Install-Registry-Edits
+        Move-Extras
     }
     if($choice.Contains('7')) {
+        Install-Registry-Edits
+    }
+    if($choice.Contains('8')) {
         Admin
     }
     
