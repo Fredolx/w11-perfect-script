@@ -86,6 +86,8 @@ function Set-FTAs {
     Register-FTA "$env:USERPROFILE\scoop\apps\kate\current\bin\kate.exe" .cfg
     Register-FTA "$env:USERPROFILE\scoop\apps\kate\current\bin\kate.exe" .conf
     Register-FTA "$env:USERPROFILE\scoop\apps\kate\current\bin\kate.exe" .ini
+    Register-FTA "$env:USERPROFILE\scoop\apps\kate\current\bin\kate.exe" .nfo
+    Register-FTA "$env:USERPROFILE\scoop\apps\kate\current\bin\kate.exe" .xml
 }
 
 function Delete-MS-Apps {
