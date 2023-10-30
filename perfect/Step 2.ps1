@@ -74,6 +74,8 @@ function Set-FTAs {
     Register-FTA "$env:USERPROFILE\scoop\apps\mpv\current\mpv.exe" .mp4
     Register-FTA "$env:USERPROFILE\scoop\apps\mpv\current\mpv.exe" .mp3
     Register-FTA "$env:USERPROFILE\scoop\apps\mpv\current\mpv.exe" .webm
+    Register-FTA "$env:USERPROFILE\scoop\apps\mpv\current\mpv.exe" .opus
+    Register-FTA "$env:USERPROFILE\scoop\apps\mpv\current\mpv.exe" .avi
     Register-FTA "$env:USERPROFILE\scoop\apps\libreoffice\current\LibreOffice\program\swriter.exe" .doc
     Register-FTA "$env:USERPROFILE\scoop\apps\libreoffice\current\LibreOffice\program\swriter.exe" .docx
     Register-FTA "$env:USERPROFILE\scoop\apps\libreoffice\current\LibreOffice\program\swriter.exe" .rtf
@@ -87,6 +89,9 @@ function Set-FTAs {
     Register-FTA "$env:USERPROFILE\scoop\apps\kate\current\bin\kate.exe" .ini
     Register-FTA "$env:USERPROFILE\scoop\apps\kate\current\bin\kate.exe" .nfo
     Register-FTA "$env:USERPROFILE\scoop\apps\kate\current\bin\kate.exe" .xml
+    Register-FTA "$env:USERPROFILE\scoop\apps\7zi[\current\7zFM.exe" .7z
+    Register-FTA "$env:USERPROFILE\scoop\apps\7zi[\current\7zFM.exe" .zip
+    Register-FTA "$env:USERPROFILE\scoop\apps\7zi[\current\7zFM.exe" .rar
 }
 
 function Delete-MS-Apps {
