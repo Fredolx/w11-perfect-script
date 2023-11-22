@@ -89,9 +89,9 @@ function Set-FTAs {
     Register-FTA "$env:USERPROFILE\scoop\apps\kate\current\bin\kate.exe" .ini
     Register-FTA "$env:USERPROFILE\scoop\apps\kate\current\bin\kate.exe" .nfo
     Register-FTA "$env:USERPROFILE\scoop\apps\kate\current\bin\kate.exe" .xml
-    Register-FTA "$env:USERPROFILE\scoop\apps\7zi[\current\7zFM.exe" .7z
-    Register-FTA "$env:USERPROFILE\scoop\apps\7zi[\current\7zFM.exe" .zip
-    Register-FTA "$env:USERPROFILE\scoop\apps\7zi[\current\7zFM.exe" .rar
+    Register-FTA "$env:USERPROFILE\scoop\apps\7zip\current\7zFM.exe" .7z
+    Register-FTA "$env:USERPROFILE\scoop\apps\7zip\current\7zFM.exe" .zip
+    Register-FTA "$env:USERPROFILE\scoop\apps\7zip\current\7zFM.exe" .rar
 }
 
 function Delete-MS-Apps {
