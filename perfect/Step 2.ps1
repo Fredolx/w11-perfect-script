@@ -6,7 +6,7 @@ function Install-Scoop {
     scoop install 7zip git
     scoop bucket add extras
     scoop bucket add java
-    scoop install qbittorrent mpv ripgrep ventoy rufus yt-dlp ffmpeg winscp openjdk libreoffice kate kdenlive innounp imagemagick gimp kdiff3
+    scoop install qbittorrent mpv ripgrep ventoy rufus yt-dlp ffmpeg winscp openjdk libreoffice kate innounp imagemagick kdiff3
     Move-Item -Force -Path "data\mpv.conf" -Destination $env:USERPROFILE\scoop\persist\mpv\portable_config
 }
 
