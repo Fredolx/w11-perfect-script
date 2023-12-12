@@ -76,6 +76,9 @@ function Set-FTAs {
     Register-FTA "$env:USERPROFILE\scoop\apps\mpv\current\mpv.exe" .webm
     Register-FTA "$env:USERPROFILE\scoop\apps\mpv\current\mpv.exe" .opus
     Register-FTA "$env:USERPROFILE\scoop\apps\mpv\current\mpv.exe" .avi
+    Register-FTA "$env:USERPROFILE\scoop\apps\mpv\current\mpv.exe" .mov
+    Register-FTA "$env:USERPROFILE\scoop\apps\mpv\current\mpv.exe" .ogg
+    Register-FTA "$env:USERPROFILE\scoop\apps\mpv\current\mpv.exe" .flv
     Register-FTA "$env:USERPROFILE\scoop\apps\libreoffice\current\LibreOffice\program\swriter.exe" .doc
     Register-FTA "$env:USERPROFILE\scoop\apps\libreoffice\current\LibreOffice\program\swriter.exe" .docx
     Register-FTA "$env:USERPROFILE\scoop\apps\libreoffice\current\LibreOffice\program\swriter.exe" .rtf
@@ -89,9 +92,12 @@ function Set-FTAs {
     Register-FTA "$env:USERPROFILE\scoop\apps\kate\current\bin\kate.exe" .ini
     Register-FTA "$env:USERPROFILE\scoop\apps\kate\current\bin\kate.exe" .nfo
     Register-FTA "$env:USERPROFILE\scoop\apps\kate\current\bin\kate.exe" .xml
+    Register-FTA "$env:USERPROFILE\scoop\apps\kate\current\bin\kate.exe" .json
+    Register-FTA "$env:USERPROFILE\scoop\apps\kate\current\bin\kate.exe" .yml
     Register-FTA "$env:USERPROFILE\scoop\apps\7zip\current\7zFM.exe" .7z
     Register-FTA "$env:USERPROFILE\scoop\apps\7zip\current\7zFM.exe" .zip
     Register-FTA "$env:USERPROFILE\scoop\apps\7zip\current\7zFM.exe" .rar
+    Register-FTA "$env:USERPROFILE\scoop\apps\qbittorrent\current\qbittorrent.exe" .torrent
 }
 
 function Delete-MS-Apps {
@@ -110,6 +116,9 @@ function Delete-MS-Apps {
 
 function Move-Extras {
     Move-Item -Path "data\desktop\*" -Destination "$env:USERPROFILE\Desktop"
+    $FolderPath = Split-Path $PROFILE.CurrentUserCurrentHost
+    New-Item -ItemType Directory -Force -Path $FolderPath
+    Copy-Item -Path "data\ps-profile.ps1" -Destination $PROFILE.CurrentUserCurrentHost -Force
 }
 
 function Admin {
