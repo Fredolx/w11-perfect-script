@@ -3,7 +3,7 @@ function Install-Scoop {
     if (!$scoopExists) {
         irm get.scoop.sh | iex
     }
-    scoop install 7zip git
+    scoop install 7zip git aria2
     scoop bucket add extras
     scoop bucket add java
     scoop install qbittorrent mpv ripgrep ventoy rufus yt-dlp ffmpeg winscp openjdk libreoffice kate innounp imagemagick kdiff3
