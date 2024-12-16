@@ -8,6 +8,10 @@ function UpdateScoopApps {
     scoop update --all *> $LogFile
 }
 
+function CleanupScoopApps {
+    scoop cleanup --all *>> $LogFile
+}
+
 function DeleteOldLogs {
     # Calculate the date three days ago
     $CutoffDate = (Get-Date).AddDays(-1)
@@ -23,4 +27,5 @@ function DeleteOldLogs {
 }
 
 UpdateScoopApps
+CleanupScoopApps
 DeleteOldLogs
